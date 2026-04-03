@@ -1,0 +1,26 @@
+{
+  "name": "master-react-zero-to-hero",
+  "version": "1.0.0",
+  "description": "react",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/navnath-nnc/master-react-zero-to-hero.git"
+  },
+  "author": "navnath.nnc",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/navnath-nnc/master-react-zero-to-hero/issues"
+  },
+  "homepage": "https://github.com/navnath-nnc/master-react-zero-to-hero#readme",
+  "dependencies": {
+    "parcel": "^2.16.4",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4"
+  },
+  "borwserlist": [
+    "last 2 versions"
+  ]
+}
