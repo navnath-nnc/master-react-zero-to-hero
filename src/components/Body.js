@@ -43,18 +43,18 @@ const Body = () => {
     <Shimmer />
   ) : (
     <div className="body">
-      <div className="filter">
-        <div className="search">
+      <div className="filter flex">
+        <div className="search m-4 p-4">
           <input
             type="text"
-            className="search"
+            className="border border-solid border-black"
             value={searchText}
             onChange={(e) => {
               setSearchText(e.target.value);
             }}
           />
           <button
-            className="searchBtn"
+            className="px-4 py-2 bg-green-100 m-4 rounded-lg"
             onClick={() => {
               // setFilteredList([]);
               const filteredList = listOfRest.filter((res) =>
@@ -67,17 +67,21 @@ const Body = () => {
             search
           </button>
         </div>
-        <button
-          className="filter-btn"
-          onClick={() => {
-            let filterList = listOfRest.filter((res) => res.info.avgRating > 4);
-            setListOfRest(filterList);
-          }}
-        >
-          Top Rated Restraurants
-        </button>
+        <div className="flex search m-4 p-4 items-center">
+          <button
+            className="px-4 py-2 bg-gray-100 rounded-lg"
+            onClick={() => {
+              let filterList = listOfRest.filter(
+                (res) => res.info.avgRating > 4,
+              );
+              setListOfRest(filterList);
+            }}
+          >
+            Top Rated Restraurants
+          </button>
+        </div>
       </div>
-      <div className="restro-container">
+      <div className="flex flex-wrap">
         {filteredList.map((restro) => (
           <Link key={restro.info.id} to={"/restaurants/" + restro.info.id}>
             <RestroCard restroData={restro} />

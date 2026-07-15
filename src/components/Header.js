@@ -15,26 +15,26 @@ const Header = () => {
   //   console.log("useEffect call");
   // }, []);
   return (
-    <div className="header">
+    <div className="flex justify-between bg-green-100 shadow-lg sm:bg-amber-200 lg:bg-pink-100">
       <div className="logo-container">
-        <img alt="logo" className="logo" src={LOGO_URL} />
+        <img alt="logo" className="w-34" src={LOGO_URL} />
       </div>
-      <div className="nav-items">
-        <ul>
-          <li>Status: {onlineStatus ? "🟢" : "🔴"}</li>
-          <li>
+      <div className="flex items-center">
+        <ul className="flex p-4 m-4">
+          <li className="px-4">Status: {onlineStatus ? "🟢" : "🔴"}</li>
+          <li className="px-4">
             <Link to="/">Home</Link>
           </li>
-          <li>
+          <li className="px-4">
             <Link to="/about">About Us</Link>
           </li>
-          <li>
+          <li className="px-4">
             <Link to="/contact"> Contact</Link>
           </li>
-          <li>
+          <li className="px-4">
             <Link to="/grocery">Grocery</Link>
           </li>
-          <li>Cart</li>
+          <li className="px-4">Cart</li>
           <button
             className="login"
             onClick={() => {
