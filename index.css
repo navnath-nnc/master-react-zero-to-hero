@@ -4,6 +4,10 @@
   border: 1px solid black;
 }
 
+.logo-container {
+  padding: 5px;
+}
+
 .logo {
   width: 150px;
 }
@@ -46,4 +50,33 @@ li {
 
 .search {
   padding: 10px;
+}
+
+.filter {
+  display: flex;
+  margin: 10px;
+  curser: pointer;
+}
+
+.shimmer-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 10px;
+}
+
+.shimmer-card {
+  width: 200px;
+  height: 400px;
+  margin: 10px;
+  backgroundcolor: "#ffffff";
+}
+
+.searchBtn {
+  margin: 5px;
+}
+
+.user-card {
+  margin: 5px;
+  padding: 10px;
+  border: 1px solid black;
 }

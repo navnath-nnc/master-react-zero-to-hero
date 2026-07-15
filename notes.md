@@ -170,3 +170,155 @@ Makes UI code simple and readable
 
 👉
 JSX lets you write HTML-like code inside JavaScript, which gets converted into normal JavaScript
+
+**What is a Functional Components?**
+In React, functional components are the modern, preferred way to build UI components. They are simply JavaScript functions that return JSX (the UI).
+
+A functional component is a plain JavaScript function that:
+Accepts props (input data)
+Returns JSX (UI to render)
+Example:
+function Welcome(props) {
+return <h1>Hello, {props.name}!</h1>;
+}
+
+Or using arrow function:
+const Welcome = ({ name }) => {
+return <h1>Hello, {name}!</h1>;
+};
+
+🔹 Key Features
+
+1. Simple and Readable
+   Functional components are easier to write and understand than class components.
+
+2. Use of Hooks
+   With Hooks, functional components can manage state and lifecycle features.
+
+Example with useState:
+import { useState } from "react";
+
+function Counter() {
+const [count, setCount] = useState(0);
+return (
+
+<div>
+<p>Count: {count}</p>
+<button onClick={() => setCount(count + 1)}>Increment</button>
+</div>
+);
+}
+
+3. No this Keyword
+   Unlike class components, functional components don’t use this, which avoids confusion.
+
+4. Reusable & Composable
+   They can be easily reused and combined to build complex UIs.
+
+🔹 Functional vs Class Components
+
+| Feature           | Functional Component | Class Component   |
+| ----------------- | -------------------- | ----------------- |
+| Syntax            | Simple function      | ES6 class         |
+| State             | Hooks (`useState`)   | `this.state`      |
+| Lifecycle methods | Hooks (`useEffect`)  | Lifecycle methods |
+| `this` keyword    | ❌ Not used          | ✅ Required       |
+
+🔹 Example with useEffect (Lifecycle)
+import { useEffect } from "react";
+
+function Timer() {
+useEffect(() => {
+console.log("Component mounted");
+
+    return () => {
+      console.log("Component unmounted");
+    };
+
+}, []);
+
+return <p>Check console</p>;
+}
+
+🔹 When to Use Functional Components?
+👉 Always prefer them in modern React development:
+Cleaner code
+Better performance (in most cases)
+Full support with Hooks
+
+**What are Props?**
+
+In React, props (short for properties) are used to pass data from one component to another, usually from a parent component to a child component.
+
+👉 Props are read-only inputs to components.
+They allow components to be dynamic and reusable.
+
+🔹 Simple Example
+Parent Component
+function App() {
+return <Welcome name="Rahul" />;
+}
+Child Component
+function Welcome(props) {
+return <h1>Hello, {props.name}</h1>;
+}
+
+👉 Output:
+Hello, Rahul
+
+🔹 How Props Work (Step-by-Step)
+Parent sends data:
+<Welcome name="Rahul" />
+Child receives it:
+function Welcome(props)
+Access it:
+props.name
+
+🔹 Using Destructuring (Cleaner Way)
+function Welcome({ name }) {
+return <h1>Hello, {name}</h1>;
+}
+
+🔹 Multiple Props Example
+function User({ name, age }) {
+return (
+
+<p>
+Name: {name}, Age: {age}
+</p>
+);
+}
+
+// Usage
+<User name="Amit" age={25} />
+
+🔹 Props are Read-Only ⚠️
+❌ Wrong:
+props.name = "New Name"; // Not allowed
+
+✅ Correct:
+Props should never be modified
+If you need to change data → use state
+
+🔹 Props vs State
+| Feature | Props | State |
+| ------- | ------------------ | ------------------------ |
+| Source | Passed from parent | Managed inside component |
+| Mutable | ❌ No | ✅ Yes |
+| Purpose | Data transfer | Data management |
+
+🔹 Real-Life Analogy
+Think of props like function arguments:
+function greet(name) {
+return "Hello " + name;
+}
+
+👉 In React:
+Component = function
+Props = arguments
+
+🔹 Key Takeaways
+Props = data passed between components
+They are immutable (read-only)
+Help make components reusable
+Used in both functional and class components

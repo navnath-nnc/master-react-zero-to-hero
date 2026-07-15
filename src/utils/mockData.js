@@ -1,27 +1,3 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-
-const Header = () => {
-  return (
-    <div className="header">
-      <div className="logo-container">
-        <img
-          alt="logo"
-          className="logo"
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmfqU-zG7yaYud7VIsKCaaprLswsw98zwgHA&s"
-        />
-      </div>
-      <div className="nav-items">
-        <ul>
-          <li>Home</li>
-          <li>About Us</li>
-          <li>Contact</li>
-          <li>Cart</li>
-        </ul>
-      </div>
-    </div>
-  );
-};
 const restroList = [
   {
     info: {
@@ -58,8 +34,8 @@ const restroList = [
       areaName: "Downtown",
       costForTwo: "₹300 for two",
       cuisines: ["Burgers", "American", "Fast Food"],
-      avgRating: 4.5,
-      avgRatingString: "4.5",
+      avgRating: 3.5,
+      avgRatingString: "3.5",
       totalRatingsString: "15K+ ratings",
       veg: false,
       sla: {
@@ -82,8 +58,8 @@ const restroList = [
       areaName: "South Zone",
       costForTwo: "₹250 for two",
       cuisines: ["Healthy Food", "Salads", "Vegan"],
-      avgRating: 4.7,
-      avgRatingString: "4.7",
+      avgRating: 3.7,
+      avgRatingString: "3.7",
       totalRatingsString: "8K+ ratings",
       veg: true,
       sla: {
@@ -156,8 +132,8 @@ const restroList = [
       areaName: "West End",
       costForTwo: "₹200 for two",
       cuisines: ["Desserts", "Ice Cream", "Bakery"],
-      avgRating: 4.6,
-      avgRatingString: "4.6",
+      avgRating: 3.6,
+      avgRatingString: "3.6",
       totalRatingsString: "7K+ ratings",
       veg: true,
       sla: {
@@ -248,52 +224,4 @@ const restroList = [
   },
 ];
 
-const RestroCard = (props) => {
-  console.log(props);
-  const { restroData } = props;
-  const { name, cloudinaryImageId, cuisines, avgRating, costForTwo } =
-    restroData?.info;
-
-  return (
-    <div className="restro-card" style={{ backgroundColor: "#f0f0f0" }}>
-      <img
-        className="restro-logo"
-        alt="restro-logo"
-        src={
-          "https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_508,h_320,c_fill/" +
-          cloudinaryImageId
-        }
-      />
-      <h3>{name}</h3>
-      <h3>{[cuisines].join(", ")}</h3>
-      <h3>{avgRating}</h3>
-      <h3>{costForTwo}</h3>
-      <h3>{restroData.info.sla.deliveryTime} minutes</h3>
-    </div>
-  );
-};
-
-const Body = () => {
-  return (
-    <div className="body">
-      <div className="search">search</div>
-      <div className="restro-container">
-        {restroList.map((restro) => (
-          <RestroCard key={restro.info.id} restroData={restro} />
-        ))}
-      </div>
-    </div>
-  );
-};
-
-const AppLayout = () => {
-  return (
-    <div className="app">
-      <Header />
-      <Body />
-    </div>
-  );
-};
-
-const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<AppLayout />);
+export default restroList;
