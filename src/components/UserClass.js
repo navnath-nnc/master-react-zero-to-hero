@@ -58,7 +58,7 @@ class UserClass extends React.Component {
         <img src={avatar_url} />
         <h1>Name: {name}</h1>
         <h2>Location: {location}</h2>
-        <h2>Contact: @mbappe10</h2>
+        <h2>Contact: @messi10</h2>
       </div>
     );
   }

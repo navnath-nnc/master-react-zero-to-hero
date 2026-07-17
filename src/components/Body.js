@@ -1,14 +1,17 @@
-import RestroCard from "./RestroCard";
+import RestroCard, { withPromotedLable } from "./RestroCard";
 import restroList from "../utils/mockData";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import UserContext from "../utils/UserContext";
 
 const Body = () => {
   const [listOfRest, setListOfRest] = useState([]);
   const [filteredList, setFilteredList] = useState([]);
   const [searchText, setSearchText] = useState("");
+
+  const RetroCardPromoted = withPromotedLable(RestroCard);
 
   useEffect(() => {
     fetchData();
@@ -38,7 +41,7 @@ const Body = () => {
     return (
       <h1>Looks like you are offline! please check your internet connection</h1>
     );
-
+  const { loggedInUser, setUserName } = useContext(UserContext);
   return listOfRest.length === 0 ? (
     <Shimmer />
   ) : (
@@ -80,11 +83,23 @@ const Body = () => {
             Top Rated Restraurants
           </button>
         </div>
+        <div className="search m-4 p-4 items-center">
+          <label>User Name: </label>
+          <input
+            className="border border-black"
+            value={loggedInUser}
+            onChange={(e) => setUserName(e.target.value)}
+          />
+        </div>
       </div>
       <div className="flex flex-wrap">
         {filteredList.map((restro) => (
           <Link key={restro.info.id} to={"/restaurants/" + restro.info.id}>
-            <RestroCard restroData={restro} />
+            {restro.info.veg ? (
+              <RetroCardPromoted restroData={restro} />
+            ) : (
+              <RestroCard restroData={restro} />
+            )}
           </Link>
         ))}
       </div>
