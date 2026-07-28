@@ -561,4 +561,683 @@ Close WebSocket connections
 
 React Class Component Lifecycle Methods are special methods that run automatically during different phases of a component's life—Mounting (componentDidMount), Updating (componentDidUpdate), and Unmounting (componentWillUnmount). They are commonly used for API calls, updating data, and cleaning up resources. In modern React, these lifecycle methods are replaced by the useEffect hook in functional components.
 
-#ReactJS #JavaScript #FrontendDevelopment #ReactDeveloper #WebDevelopment #Coding #InterviewPreparation #LearnReact
+**What is Redux?**
+
+Redux is a state management library that stores your application's global state in one central place called the Store.
+
+Instead of passing data from parent → child → grandchild using props (prop drilling), components can directly read from and update the Redux store.
+
+Example Problem (Without Redux)
+App
+│
+├── Header (Cart Count)
+│
+├── ProductList
+│ └── Product
+│ └── Add to Cart
+│
+└── Cart Page
+
+When a user clicks Add to Cart, both the Header and Cart Page need the updated cart data.
+
+Without Redux:
+
+App
+│
+▼
+Header
+
+App
+│
+▼
+ProductList
+│
+▼
+Product
+
+App
+│
+▼
+Cart
+
+The cart data must be passed through multiple components.
+
+This is called Prop Drilling.
+
+Redux Solution
+
+Redux creates one central store.
+
+                Redux Store
+        ┌───────────────────────────┐
+        │ User                     │
+        │ Cart                     │
+        │ Theme                    │
+        │ Authentication           │
+        └───────────────────────────┘
+          ▲          ▲          ▲
+          │          │          │
+      Header    Product     Cart
+
+Every component can access the store directly.
+
+Redux Flow
+User Clicks Button
+│
+▼
+Dispatch Action
+│
+▼
+Reducer
+│
+▼
+Redux Store Updated
+│
+▼
+React Re-renders Components
+What Problems Did Classic Redux Have?
+
+Classic Redux required writing lots of repetitive code.
+
+For every feature you had to write:
+
+Action Types
+Action Creators
+Reducers
+Store Configuration
+Middleware Configuration
+
+Example:
+
+// Action
+const increment = () => ({
+type: "INCREMENT",
+});
+
+// Reducer
+function counterReducer(state = 0, action) {
+switch (action.type) {
+case "INCREMENT":
+return state + 1;
+default:
+return state;
+}
+}
+
+Lots of boilerplate.
+
+What is Redux Toolkit (RTK)?
+
+Redux Toolkit (RTK) is the official, recommended way to write Redux code.
+
+It reduces boilerplate and includes best practices out of the box.
+
+Think of it like this:
+
+Redux = Build a bicycle from individual parts.
+Redux Toolkit = Buy a ready-to-ride bicycle.
+
+Both work, but Redux Toolkit gets you there much faster.
+
+Redux vs Redux Toolkit
+| Redux | Redux Toolkit (RTK) |
+| ------------------------------ | --------------------------------------------------- |
+| Lots of boilerplate code | Minimal boilerplate |
+| Uses `createStore()` | Uses `configureStore()` |
+| Actions created manually | Actions generated automatically |
+| Reducers written separately | Reducers and actions together using `createSlice()` |
+| Middleware configured manually | Default middleware included |
+| DevTools setup required | DevTools enabled automatically |
+| Manual immutable updates | Uses Immer internally |
+| More code to maintain | Cleaner and easier to maintain |
+| Older approach | Officially recommended approach |
+
+Redux Toolkit Architecture
+React Component
+│
+▼
+dispatch(action)
+│
+▼
+createSlice()
+│
+▼
+Reducer
+│
+▼
+configureStore()
+│
+▼
+Redux Store
+│
+▼
+useSelector()
+Important Concepts in Redux Toolkit
+
+1. configureStore()
+
+Creates the Redux store.
+
+import { configureStore } from "@reduxjs/toolkit";
+import counterReducer from "./counterSlice";
+
+export const store = configureStore({
+reducer: {
+counter: counterReducer,
+},
+});
+Benefits
+Configures Redux DevTools automatically
+Adds Redux Thunk middleware
+Better defaults 2. createSlice()
+
+This is the most important API in Redux Toolkit.
+
+Instead of creating:
+
+Actions
+Reducers
+Action Types
+
+separately,
+
+createSlice() creates them all.
+
+import { createSlice } from "@reduxjs/toolkit";
+
+const counterSlice = createSlice({
+name: "counter",
+
+initialState: {
+value: 0,
+},
+
+reducers: {
+increment(state) {
+state.value++;
+},
+
+    decrement(state) {
+      state.value--;
+    },
+
+},
+});
+
+export const { increment, decrement } = counterSlice.actions;
+
+export default counterSlice.reducer; 3. Provider
+
+Makes the Redux store available to the React application.
+
+import { Provider } from "react-redux";
+
+<Provider store={store}>
+    <App />
+</Provider>
+4. useSelector()
+
+Reads data from the Redux store.
+
+import { useSelector } from "react-redux";
+
+const count = useSelector(state => state.counter.value);
+
+Think of it as:
+
+Store
+
+↓
+
+Read Data 5. useDispatch()
+
+Updates the Redux store.
+
+import { useDispatch } from "react-redux";
+
+const dispatch = useDispatch();
+
+dispatch(increment());
+
+Think of it as:
+
+Component
+
+↓
+
+Dispatch Action
+
+↓
+
+Store Updated 6. Immer
+
+Normally in Redux you cannot mutate state.
+
+Old Redux:
+
+return {
+...state,
+count: state.count + 1
+}
+
+Redux Toolkit uses Immer, so you can write:
+
+state.count++;
+
+Behind the scenes, Immer creates a new immutable state.
+
+7. createAsyncThunk()
+
+Handles asynchronous operations like API calls.
+
+export const fetchUsers = createAsyncThunk(
+"users/fetchUsers",
+async () => {
+const response = await fetch("/users");
+return response.json();
+}
+);
+
+Instead of manually writing:
+
+Loading
+Success
+Error actions
+
+Redux Toolkit generates them automatically.
+
+8. extraReducers
+
+Used to respond to actions generated outside the slice, especially async thunks.
+
+extraReducers: (builder) => {
+builder
+.addCase(fetchUsers.pending, (state) => {
+state.loading = true;
+})
+.addCase(fetchUsers.fulfilled, (state, action) => {
+state.loading = false;
+state.users = action.payload;
+})
+.addCase(fetchUsers.rejected, (state) => {
+state.loading = false;
+});
+}
+Complete Flow
+User clicks "Add to Cart"
+
+        │
+        ▼
+
+dispatch(addToCart(product))
+
+        │
+        ▼
+
+createSlice()
+
+        │
+        ▼
+
+Reducer updates state
+
+        │
+        ▼
+
+Store Updated
+
+        │
+        ▼
+
+useSelector()
+
+        │
+        ▼
+
+React UI Updates
+Folder Structure
+src/
+
+store/
+│
+├── store.js
+│
+├── cartSlice.js
+│
+├── userSlice.js
+│
+└── productSlice.js
+When Should You Use Redux Toolkit?
+
+Use it when:
+
+Multiple components share the same data.
+Managing authentication.
+Shopping cart.
+User profile.
+Theme (dark/light mode).
+Notifications.
+Large-scale applications.
+
+For simple local state (e.g., a form input or modal visibility), useState is usually sufficient.
+
+Final Thoughts:
+
+Redux is a state management library that stores an application's global state in a centralized store, allowing multiple components to access and update shared data without prop drilling. Redux Toolkit is the official, recommended way to use Redux. It simplifies Redux development by providing APIs such as configureStore for store creation, createSlice for generating reducers and actions, createAsyncThunk for handling asynchronous operations, and built-in middleware and DevTools support. Redux Toolkit also uses Immer internally, allowing developers to write simpler immutable update logic. Because it reduces boilerplate and follows best practices, Redux Toolkit is the preferred choice for modern React applications.
+
+**Unit Test Cases**
+What is React Testing Library?
+
+React Testing Library is a library used to test React components the way users interact with them, instead of testing implementation details.
+
+Instead of asking:
+
+❌ "Does this component use useState?"
+
+It asks:
+
+✅ "Can the user see the button?"
+
+✅ "Can the user click the button?"
+
+✅ "Does the screen update after clicking?"
+
+Common Imports
+import { render, screen, fireEvent, act } from "@testing-library/react";
+import "@testing-library/jest-dom";
+
+Let's understand each one.
+
+1. render()
+   Purpose
+
+Renders a React component into a virtual DOM for testing.
+
+import { render } from "@testing-library/react";
+import App from "./App";
+
+test("renders App", () => {
+render(<App />);
+});
+
+Think of it as:
+
+Component
+
+↓
+
+render()
+
+↓
+
+Virtual Browser
+
+↓
+
+Now we can test it 2. screen
+
+screen is used to find elements on the rendered page.
+
+Example component
+
+function Login() {
+return <h1>Welcome</h1>;
+}
+
+Test
+
+render(<Login />);
+
+expect(screen.getByText("Welcome")).toBeInTheDocument();
+Common Queries
+getByText()
+screen.getByText("Login")
+
+Find text.
+
+getByRole()
+screen.getByRole("button")
+
+Find button.
+
+getByLabelText()
+screen.getByLabelText("Username")
+
+Find input using its label.
+
+getByPlaceholderText()
+screen.getByPlaceholderText("Enter name")
+getByTestId()
+
+<div data-testid="user-card"></div>
+screen.getByTestId("user-card")
+3. fireEvent()
+
+Simulates user actions.
+
+Example
+
+function Counter() {
+const [count, setCount] = React.useState(0);
+
+return (
+<>
+
+<h1>{count}</h1>
+
+      <button
+        onClick={() => setCount(count + 1)}
+      >
+        Increment
+      </button>
+    </>
+
+);
+}
+
+Test
+
+render(<Counter />);
+
+fireEvent.click(
+screen.getByText("Increment")
+);
+
+expect(
+screen.getByText("1")
+).toBeInTheDocument();
+Common fireEvent Methods
+
+Click
+
+fireEvent.click(button);
+
+Input
+
+fireEvent.change(input, {
+target: {
+value: "Navnath"
+}
+});
+
+Submit
+
+fireEvent.submit(form);
+
+Keyboard
+
+fireEvent.keyDown(input,{
+key:"Enter"
+}); 4. act()
+
+act() ensures that all state updates and effects have finished before making assertions.
+
+Without it, React may warn:
+
+Warning:
+An update to Component inside a test was not wrapped in act(...)
+
+Example
+
+await act(async () => {
+render(<App />);
+});
+
+Or
+
+await act(async () => {
+fireEvent.click(button);
+});
+
+Note: React Testing Library already wraps most render() and fireEvent() calls in act() internally. You typically need act() only for manual async updates (timers, promises, etc.).
+
+5. jest-dom
+
+Provides extra matchers.
+
+Without it
+
+expect(button).toBe(true);
+
+With jest-dom
+
+expect(button).toBeInTheDocument();
+
+Much easier to read.
+
+Common Matchers
+toBeInTheDocument()
+expect(button)
+.toBeInTheDocument();
+toHaveTextContent()
+expect(button)
+.toHaveTextContent("Login");
+toHaveValue()
+expect(input)
+.toHaveValue("Navnath");
+toBeDisabled()
+expect(button)
+.toBeDisabled();
+toBeEnabled()
+expect(button)
+.toBeEnabled();
+toHaveAttribute()
+expect(img)
+.toHaveAttribute("src","logo.png");
+Complete Example
+Component
+import { useState } from "react";
+
+function Counter() {
+const [count, setCount] = useState(0);
+
+return (
+<>
+
+<h2>Count: {count}</h2>
+
+      <button
+        onClick={() =>
+          setCount(count + 1)
+        }
+      >
+        Increment
+      </button>
+    </>
+
+);
+}
+
+export default Counter;
+Test
+import {
+render,
+screen,
+fireEvent,
+} from "@testing-library/react";
+
+import "@testing-library/jest-dom";
+
+import Counter from "./Counter";
+
+test("increments count", () => {
+
+render(<Counter />);
+
+expect(
+screen.getByText("Count: 0")
+).toBeInTheDocument();
+
+fireEvent.click(
+screen.getByText("Increment")
+);
+
+expect(
+screen.getByText("Count: 1")
+).toBeInTheDocument();
+});
+Testing an Input
+
+Component
+
+function Login() {
+return (
+<>
+<label>Name</label>
+
+      <input placeholder="Enter Name"/>
+    </>
+
+);
+}
+
+Test
+
+render(<Login />);
+
+const input = screen.getByPlaceholderText("Enter Name");
+
+fireEvent.change(input,{
+target:{
+value:"Navnath"
+}
+});
+
+expect(input).toHaveValue("Navnath");
+Testing a Button Click
+render(<Counter />);
+
+const button = screen.getByRole("button");
+
+fireEvent.click(button);
+
+expect(
+screen.getByText("Count: 1")
+).toBeInTheDocument();
+
+Why use React Testing Library instead of Enzyme?
+Tests behavior from the user's perspective.
+Encourages accessibility by querying elements via roles, labels, and text.
+Avoids testing implementation details.
+
+Difference between getBy, queryBy, and findBy
+| Method | When to Use |
+| ------------ | --------------------------------------------------------- |
+| `getBy...` | Element **must** exist immediately; throws if not found |
+| `queryBy...` | Element may not exist; returns `null` instead of throwing |
+| `findBy...` | Element appears **asynchronously**; returns a Promise |
+
+Example:
+
+// Synchronous
+screen.getByText("Login");
+
+// Check absence
+expect(screen.queryByText("Loading")).not.toBeInTheDocument();
+
+// Asynchronous
+const message = await screen.findByText("Data Loaded");
+
+Final Thoughts:
+
+React Testing Library is used to test React components from the user's perspective. render() mounts the component into a virtual DOM, screen is used to query elements, fireEvent() simulates user interactions like clicks and typing, and @testing-library/jest-dom provides readable assertions such as toBeInTheDocument() and toHaveValue(). For asynchronous state updates, React's act() ensures updates are completed before assertions, although React Testing Library automatically wraps most common interactions with act(). This approach helps create reliable tests that focus on user behavior rather than implementation details.
