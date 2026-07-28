@@ -1,3 +1,4 @@
+import React from "react";
 import RestroCard, { withPromotedLable } from "./RestroCard";
 import restroList from "../utils/mockData";
 import { useContext, useEffect, useState } from "react";
@@ -23,9 +24,9 @@ const Body = () => {
     );
     const json = await response.json();
     // console.log(json);
-    console.log(
-      json.data.data.cards[1].card.card.gridElements.infoWithStyle.restaurants,
-    );
+    // console.log(
+    //   json.data.data.cards[1].card.card.gridElements.infoWithStyle.restaurants,
+    // );
 
     setListOfRest(
       json.data.data.cards[1].card.card.gridElements.infoWithStyle.restaurants,
@@ -50,6 +51,7 @@ const Body = () => {
         <div className="search m-4 p-4">
           <input
             type="text"
+            data-testid="searchInput"
             className="border border-solid border-black"
             value={searchText}
             onChange={(e) => {
@@ -57,7 +59,7 @@ const Body = () => {
             }}
           />
           <button
-            className="px-4 py-2 bg-green-100 m-4 rounded-lg"
+            className="px-4 py-2 bg-green-100 m-4 rounded-lg cursor-pointer"
             onClick={() => {
               // setFilteredList([]);
               const filteredList = listOfRest.filter((res) =>
@@ -67,17 +69,17 @@ const Body = () => {
               setFilteredList(filteredList);
             }}
           >
-            search
+            Search
           </button>
         </div>
         <div className="flex search m-4 p-4 items-center">
           <button
-            className="px-4 py-2 bg-gray-100 rounded-lg"
+            className="px-4 py-2 bg-gray-100 rounded-lg cursor-pointer"
             onClick={() => {
               let filterList = listOfRest.filter(
-                (res) => res.info.avgRating > 4,
+                (res) => res.info.avgRating > 4.5,
               );
-              setListOfRest(filterList);
+              setFilteredList(filterList);
             }}
           >
             Top Rated Restraurants

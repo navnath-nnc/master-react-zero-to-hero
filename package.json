@@ -4,6 +4,7 @@
   "description": "react",
   "scripts": {
     "test": "jest",
+    "watch-test": "jest --watch",
     "start": "parcel index.html",
     "build": "parcel build index.html"
   },
@@ -18,14 +19,27 @@
   },
   "homepage": "https://github.com/navnath-nnc/master-react-zero-to-hero#readme",
   "dependencies": {
+    "@reduxjs/toolkit": "^2.12.0",
     "@tailwindcss/postcss": "^4.3.2",
     "parcel": "^2.16.4",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
+    "react-redux": "^9.3.0",
     "react-router-dom": "^6.30.4",
     "tailwindcss": "^4.3.2"
   },
   "borwserlist": [
     "last 2 versions"
-  ]
+  ],
+  "devDependencies": {
+    "@babel/core": "^7.29.7",
+    "@babel/preset-env": "^7.29.7",
+    "@babel/preset-react": "^7.29.7",
+    "@testing-library/jest-dom": "^7.0.0",
+    "@testing-library/react": "^16.3.2",
+    "babel-jest": "^29.7.0",
+    "install": "^0.13.0",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0"
+  }
 }

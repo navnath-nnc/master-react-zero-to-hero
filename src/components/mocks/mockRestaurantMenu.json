@@ -1,0 +1,188 @@
+{
+  "status": true,
+  "message": "Restaurant Menu fetched successfully",
+  "data": {
+    "cards": [
+      {},
+      {},
+      {
+        "card": {
+          "card": {
+            "info": {
+              "id": "345678",
+              "name": "Green Bites",
+              "cloudinaryImageId": "e0839ff574213e6f35b3899ebf1fc597",
+              "locality": "Residency Road",
+              "areaName": "South Zone",
+              "costForTwo": "₹250 for two",
+              "costForTwoMessage": "₹250 for two",
+              "cuisines": ["Healthy Food", "Salads", "Vegan"],
+              "avgRating": 4.7,
+              "avgRatingString": "4.7",
+              "totalRatingsString": "8K+ ratings",
+              "sla": {
+                "deliveryTime": 20,
+                "lastMileTravel": 1.5,
+                "lastMileTravelString": "1.5 km",
+                "slaString": "20 mins"
+              }
+            }
+          }
+        }
+      },
+      {},
+      {
+        "groupedCard": {
+          "cardGroupMap": {
+            "REGULAR": {
+              "cards": [
+                {},
+                {
+                  "card": {
+                    "card": {
+                      "@type": "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory",
+                      "title": "Signature Salads",
+                      "itemCards": [
+                        {
+                          "card": {
+                            "info": {
+                              "id": "item_201",
+                              "name": "Greek Salad",
+                              "category": "Salads",
+                              "description": "Fresh vegetables with feta cheese and olives",
+                              "imageId": "FOOD_CATALOG/IMAGES/CMS/2025/5/23/754c1beb-c413-4fc9-b141-d3680387b462_b553356f-7a27-477f-be6e-f6b9ec3a8bdb.jpg",
+                              "price": 19900,
+                              "defaultPrice": 19900
+                            }
+                          }
+                        },
+                        {
+                          "card": {
+                            "info": {
+                              "id": "item_202",
+                              "name": "Caesar Salad",
+                              "category": "Salads",
+                              "description": "Crispy romaine lettuce with caesar dressing and croutons",
+                              "imageId": "FOOD_CATALOG/IMAGES/CMS/2025/5/23/754c1beb-c413-4fc9-b141-d3680387b462_b553356f-7a27-477f-be6e-f6b9ec3a8bdb.jpg",
+                              "price": 21900
+                            }
+                          }
+                        },
+                        {
+                          "card": {
+                            "info": {
+                              "id": "item_203",
+                              "name": "Quinoa Power Bowl",
+                              "category": "Salads",
+                              "description": "Protein-rich quinoa with roasted vegetables and tahini",
+                              "imageId": "FOOD_CATALOG/IMAGES/CMS/2025/5/23/754c1beb-c413-4fc9-b141-d3680387b462_b553356f-7a27-477f-be6e-f6b9ec3a8bdb.jpg",
+                              "price": 24900,
+                              "defaultPrice": 24900
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "card": {
+                    "card": {
+                      "@type": "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory",
+                      "title": "Smoothie Bowls",
+                      "itemCards": [
+                        {
+                          "card": {
+                            "info": {
+                              "id": "item_204",
+                              "name": "Acai Berry Bowl",
+                              "category": "Bowls",
+                              "description": "Acai smoothie topped with fresh fruits and granola",
+                              "imageId": "FOOD_CATALOG/IMAGES/CMS/2025/5/23/754c1beb-c413-4fc9-b141-d3680387b462_b553356f-7a27-477f-be6e-f6b9ec3a8bdb.jpg",
+                              "price": 27900
+                            }
+                          }
+                        },
+                        {
+                          "card": {
+                            "info": {
+                              "id": "item_205",
+                              "name": "Green Goddess Bowl",
+                              "category": "Bowls",
+                              "description": "Spinach and avocado smoothie with chia seeds",
+                              "imageId": "FOOD_CATALOG/IMAGES/CMS/2025/5/23/754c1beb-c413-4fc9-b141-d3680387b462_b553356f-7a27-477f-be6e-f6b9ec3a8bdb.jpg",
+                              "price": 25900,
+                              "defaultPrice": 25900
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "card": {
+                    "card": {
+                      "@type": "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory",
+                      "title": "Fresh Juices",
+                      "itemCards": [
+                        {
+                          "card": {
+                            "info": {
+                              "id": "item_206",
+                              "name": "Orange Juice",
+                              "category": "Juices",
+                              "description": "Freshly squeezed orange juice",
+                              "imageId": "FOOD_CATALOG/IMAGES/CMS/2025/5/23/754c1beb-c413-4fc9-b141-d3680387b462_b553356f-7a27-477f-be6e-f6b9ec3a8bdb.jpg",
+                              "price": 9900,
+                              "defaultPrice": 9900
+                            }
+                          }
+                        },
+                        {
+                          "card": {
+                            "info": {
+                              "id": "item_207",
+                              "name": "Green Detox Juice",
+                              "category": "Juices",
+                              "description": "Kale, cucumber, apple, and ginger blend",
+                              "imageId": "FOOD_CATALOG/IMAGES/CMS/2025/5/23/754c1beb-c413-4fc9-b141-d3680387b462_b553356f-7a27-477f-be6e-f6b9ec3a8bdb.jpg",
+                              "price": 14900
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "card": {
+                    "card": {
+                      "@type": "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory",
+                      "title": "Wraps",
+                      "itemCards": [
+                        {
+                          "card": {
+                            "info": {
+                              "id": "item_208",
+                              "name": "Falafel Wrap",
+                              "category": "Wraps",
+                              "description": "Crispy falafel with hummus and fresh veggies",
+                              "imageId": "FOOD_CATALOG/IMAGES/CMS/2025/5/23/754c1beb-c413-4fc9-b141-d3680387b462_b553356f-7a27-477f-be6e-f6b9ec3a8bdb.jpg",
+                              "price": 18900,
+                              "defaultPrice": 18900
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    ]
+  }
+}

@@ -1,3 +1,4 @@
+import React from "react";
 import { useState } from "react";
 import ItemList from "./ItemList";
 
@@ -15,7 +16,7 @@ const RestaurantCategory = ({ data, showItems, setShowIndex }) => {
           onClick={handleClick}
         >
           <span className="font-bold text-lg">
-            {data?.title}({data?.itemCards.length})
+            {data?.title} ({data?.itemCards.length})
           </span>
           <span>⬇️</span>
         </div>

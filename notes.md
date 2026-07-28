@@ -322,3 +322,243 @@ Props = data passed between components
 They are immutable (read-only)
 Help make components reusable
 Used in both functional and class components
+
+**Higher-Order Components (HOC) In React**
+
+A Higher-Order Component (HOC) is a function that takes an existing component and adds extra functionality to it, without changing the original component.
+
+Think of it like this:
+
+☕ Coffee → Original Component
+
+🥛 Add Milk → Higher-Order Component (HOC)
+
+☕🥛 Coffee with Milk → Enhanced Component
+
+The coffee is still coffee—you've just added something extra!
+
+💻 Example
+
+Suppose you have a Profile component.
+
+function Profile() {
+
+return <h2>Welcome User</h2>;
+
+}
+
+Now, before showing the profile, you want to check whether the user is logged in.
+
+Instead of writing the same login check in every component, create a HOC:
+
+const ProtectedProfile = withAuth(Profile);
+
+Now ProtectedProfile has authentication built in, while the original Profile component remains unchanged.
+
+📌 Why use HOCs?
+
+✅ Reuse common logic
+
+✅ Avoid duplicate code
+
+✅ Keep components clean and focused
+
+✅ Add features like Authentication, Logging, Loading, or Permissions
+
+🧠 Easy Way to Remember
+
+A Higher-Order Function takes a function and returns another function.
+
+Similarly,
+
+A Higher-Order Component takes a Component and returns an Enhanced Component.
+
+💡 Final Thoughts
+
+A Higher-Order Component (HOC) is a function that takes a React component as input and returns a new component with additional functionality, without modifying the original component.
+
+Note: In modern React, Custom Hooks are generally preferred for sharing logic between function components, but you'll still find HOCs in many existing projects and libraries.
+
+**What is Controlled and Uncontrolled Components in React**
+📝 Imagine a Registration Form
+
+It has a Name input field.
+
+1️⃣ Controlled Component
+In a Controlled Component, React controls the input value using state.
+
+Think of it like a teacher checking every word you write.
+As soon as you type something, React immediately knows about it.
+function App() {
+const [name, setName] = useState("");
+return (
+<input
+value={name}
+onChange={(e) => setName(e.target.value)}
+/>
+);
+}
+
+✅ Every keystroke updates React state.
+
+Real-Life Analogy
+👩‍🏫 Teacher watches every word you write.
+
+You write:
+
+A → React knows
+
+An → React knows
+
+Ang → React knows
+
+Angular → React knows
+
+React is always in control.
+
+When to use?
+
+✅ Form validation
+
+✅ Search boxes
+
+✅ Dynamic forms
+
+✅ Live character count
+
+2️⃣ Uncontrolled Component
+
+In an Uncontrolled Component, the browser controls the input value, not React.
+
+React only reads the value when it's needed using useRef.
+
+Think of it like writing an exam.
+The teacher doesn't watch every word you write. They only check your answer sheet after you finish.
+
+function App() {
+const inputRef = useRef();
+
+const handleClick = () => {
+alert(inputRef.current.value);
+};
+
+return (
+<>
+<input ref={inputRef} />
+<button onClick={handleClick}>
+Submit
+</button>
+</>
+);
+}
+
+Here, React reads the value only when the button is clicked.
+
+Real-Life Analogy
+
+📝 Student writes the entire answer.
+
+👨‍🏫 Teacher checks only after submission.
+
+🧠 Easy Way to Remember
+
+👉 Controlled = React is the Boss.
+
+👉 Uncontrolled = Browser is the Boss.
+
+💡 Final Thoughts-
+
+A Controlled Component is a form element whose value is managed by React state using useState. An Uncontrolled Component stores its value in the DOM, and React accesses it using useRef only when needed. Controlled components are preferred in most React applications because they make validation, conditional rendering, and form handling much easier.
+
+**Class Component Lifecycle Methods**
+
+Before React Hooks (useEffect) were introduced, React developers used Lifecycle Methods in Class Components to perform different actions during a component's life.
+
+React Class Component goes through three phases:
+
+1. Mounting
+
+This happens when the compo nent is created and shown on the screen for the first time.
+
+Lifecycle Method:
+
+componentDidMount() {
+console.log("Component Mounted");
+}
+
+Real-life Example:
+
+Imagine opening a shopping app.
+
+As soon as the page opens, it fetches the list of products from the server.
+
+👉 componentDidMount() is the perfect place to:
+
+- Fetch API data
+- Start timers
+- Add event listeners
+
+2. Updating
+
+Whenever state or props change, React updates the component.
+
+Lifecycle Method:
+
+componentDidUpdate(prevProps, prevState) {
+console.log("Component Updated");
+}
+
+Real-life Example:
+
+You click the + button on a shopping cart.
+
+The cart count changes from:
+
+1️⃣ → 2️⃣ → 3️⃣
+
+Every update causes the component to re-render.
+
+👉 componentDidUpdate() is useful for:
+
+Making API calls after data changes
+Updating charts
+Logging changes
+
+3. Unmounting
+
+When the user leaves the page, React removes the component.
+
+Lifecycle Method:
+
+componentWillUnmount() {
+console.log("Component Removed");
+}
+
+Real-life Example:
+
+Imagine listening to music.
+
+When you close the music page, the player should stop.
+
+Similarly, before removing a component, React performs cleanup.
+
+👉 componentWillUnmount() is used to:
+
+Remove event listeners
+Clear timers (setInterval, setTimeout)
+Cancel API requests
+Close WebSocket connections
+
+🧠Easy Way to Remember
+
+- componentDidMount() → Runs once when the component appears.
+
+- componentDidUpdate() → Runs whenever state or props change.
+
+- componentWillUnmount() → Runs before the component is removed.
+
+💡 Final Thoughts-
+
+React Class Component Lifecycle Methods are special methods that run automatically during different phases of a component's life—Mounting (componentDidMount), Updating (componentDidUpdate), and Unmounting (componentWillUnmount). They are commonly used for API calls, updating data, and cleaning up resources. In modern React, these lifecycle methods are replaced by the useEffect hook in functional components.
+
+#ReactJS #JavaScript #FrontendDevelopment #ReactDeveloper #WebDevelopment #Coding #InterviewPreparation #LearnReact
